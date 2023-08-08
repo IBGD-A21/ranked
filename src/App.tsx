@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { CardMember } from "./components/CardMember";
+import { Members } from "./models/member.types";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const members: Members = [
+    { id: 0, name: "Lorem Ipsum 1", stars: Math.round(Math.random() * 10) },
+    { id: 1, name: "Lorem Ipsum 2", stars: Math.round(Math.random() * 10) },
+    { id: 2, name: "Lorem Ipsum 3", stars: Math.round(Math.random() * 10) },
+    { id: 3, name: "Lorem Ipsum 4", stars: Math.round(Math.random() * 10) },
+    { id: 4, name: "Lorem Ipsum 5", stars: Math.round(Math.random() * 10) },
+  ];
+
+  const renderMemberList = () => {
+    return members.map((member, index) => {
+      return (
+        <CardMember
+          key={index}
+          name={member.name}
+          stars={member.stars}
+        />
+      );
+    });
+  };
+  return <div className="App">{renderMemberList()}</div>;
 }
 
 export default App;
