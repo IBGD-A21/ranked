@@ -1,47 +1,58 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, IconButton } from "@mui/material";
+import React from "react";
+import {
+  Avatar,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  IconButton
+} from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { stringAvatar } from "../../utils";
 import { MemberCardProps } from "./types";
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { Add, Remove } from "@mui/icons-material";
 
 const MemberCard = (props: MemberCardProps) => {
   const {
     name = "Lorem Ipsum",
-    stars,
-    id,
-    onAddStar,
+    stars
   } = props;
 
-  const renderStars = () => {
-    return [...Array(stars)].map((_, i) => <StarIcon key={i} />);
-  };
+  const [_stars, setStars] = React.useState(stars);
 
-  const onAddStarChild = () => {
-    onAddStar && onAddStar(id)
-  }
+  const renderStars = () => [...Array(_stars)].map((_, i) => <StarIcon key={i} />);
+
+  const handleStarChange = (buttonState: "add" | "remove") => {
+    setStars(prev => (buttonState === "add" ? prev + 1 : prev - 1));
+  };
 
   return (
     <>
       <Card>
-        <CardHeader avatar={<Avatar {...stringAvatar(name)} />} title={name} />
+        <CardHeader
+          avatar={<Avatar {...stringAvatar(name)} />}
+          title={name}
+        />
+
         <CardContent>{renderStars()}</CardContent>
+
         <CardActions>
-        <IconButton
-          size="small"
-          color="primary"
-          onClick={onAddStarChild}
-        >
-         <AddIcon />
-        </IconButton>
-        <Button
-          size="small"
-          color="primary"
-          // onClick={onAddStar}
-        >
-         <RemoveIcon />
-        </Button>
-      </CardActions>
+          <IconButton
+            size="small"
+            color="primary"
+            onClick={(_) => handleStarChange("add")}
+          >
+            <Add />
+          </IconButton>
+          <IconButton
+            size="small"
+            color="primary"
+            onClick={(_) => handleStarChange("remove")}
+          >
+            <Remove />
+          </IconButton>
+        </CardActions>
+
       </Card>
     </>
   );
