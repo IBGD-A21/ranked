@@ -11,6 +11,12 @@ function App() {
     { id: 4, name: "Lorem Ipsum 5", stars: Math.round(Math.random() * 10) },
   ];
 
+  const handleAddStar = (props: any) => {
+    // console.log(props);
+    members[props].stars++;
+    console.log(members[props].stars);
+  }
+
   const renderMemberList = () => {
     return members.map((member, index) => {
       return (
@@ -18,10 +24,13 @@ function App() {
           key={index}
           name={member.name}
           stars={member.stars}
+          id={index}
+          onAddStar={handleAddStar}
         />
       );
     });
   };
+
   return <div className="App">{renderMemberList()}</div>;
 }
 
