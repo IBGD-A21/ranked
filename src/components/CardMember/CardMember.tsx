@@ -1,16 +1,13 @@
 import React from "react";
 import {
   Avatar,
-  Card,
   CardActions,
-  CardContent,
-  CardHeader,
   IconButton
 } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
 import { stringAvatar } from "../../utils";
 import { MemberCardProps } from "./types";
 import { Add, Remove } from "@mui/icons-material";
+import { StyledCard, StyledCardContent, StyledCardHeader, StyledStarIcon } from "./styles";
 
 const MemberCard = (props: MemberCardProps) => {
   const {
@@ -20,7 +17,7 @@ const MemberCard = (props: MemberCardProps) => {
 
   const [_stars, setStars] = React.useState(stars);
 
-  const renderStars = () => [...Array(_stars)].map((_, i) => <StarIcon key={i} />);
+  const renderStars = () => [...Array(_stars)].map((_, i) => <StyledStarIcon key={i} />);
 
   const handleStarChange = (buttonState: "add" | "remove") => {
     setStars(prev => (buttonState === "add" ? prev + 1 : prev - 1));
@@ -28,13 +25,13 @@ const MemberCard = (props: MemberCardProps) => {
 
   return (
     <>
-      <Card>
-        <CardHeader
+      <StyledCard>
+        <StyledCardHeader
           avatar={<Avatar {...stringAvatar(name)} />}
           title={name}
         />
 
-        <CardContent>{renderStars()}</CardContent>
+        <StyledCardContent>{renderStars()}</StyledCardContent>
 
         <CardActions>
           <IconButton
@@ -53,7 +50,7 @@ const MemberCard = (props: MemberCardProps) => {
           </IconButton>
         </CardActions>
 
-      </Card>
+      </StyledCard>
     </>
   );
 };
