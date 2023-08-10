@@ -20,7 +20,11 @@ const MemberCard = (props: MemberCardProps) => {
   const renderStars = () => [...Array(_stars)].map((_, i) => <StyledStarIcon key={i} />);
 
   const handleStarChange = (buttonState: "add" | "remove") => {
-    setStars(prev => (buttonState === "add" ? prev + 1 : prev - 1));
+    setStars(prev => {
+      if (buttonState === "add") return prev + 1;
+      if (buttonState === "remove"  && prev > 1) return prev - 1;
+      return 0;
+    });
   };
 
   return (
