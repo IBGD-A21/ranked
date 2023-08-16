@@ -1,6 +1,7 @@
+import React from "react";
 import "./App.css";
 import { CardMember } from "./components/CardMember";
-import { Members } from "./models/member.types";
+import { Member, Members } from "./models/member.types";
 
 function App() {
   const members: Members = [
@@ -11,16 +12,29 @@ function App() {
     { id: 4, name: "Lorem Ipsum 5", stars: Math.round(Math.random() * 10) },
   ];
 
+  const [membersSorted, setMembersSorted] = React.useState<Members>(() => {
+    const temp = [...members];
+    return temp.sort((a: Member, b: Member) => (a.stars > b.stars ? -1 : 1))
+  });
+
+  console.log("non sorted", members);
+  console.log("sorted", membersSorted);
+
+  const handleOnStarChanged = (data: any) => {
+    console.log(data);
+  };
+
   const renderMemberList = () => {
-    return members.map((member, index) => {
-      return (
-        <CardMember
+    return membersSorted
+      // .sort((a: Member, b: Member) => (a.stars > b.stars ? -1 : 1))
+      .map((member, index) => {
+        return <CardMember
           key={index}
           name={member.name}
           stars={member.stars}
-        />
-      );
-    });
+          onStarChanged={handleOnStarChanged}
+        />;
+      });
   };
 
   return <div className="App">{renderMemberList()}</div>;
