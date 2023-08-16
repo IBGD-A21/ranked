@@ -1,7 +1,9 @@
 import React from "react";
 import "./App.css";
 import { CardMember } from "./components/CardMember";
-import { Member, Members } from "./models/member.types";
+import { Members } from "./models/member.types";
+import { IOnStarChanged } from "./components/CardMember/types";
+import { sortArray } from "./utils";
 
 function App() {
   const members: Members = [
@@ -11,31 +13,32 @@ function App() {
     { id: 3, name: "Lorem Ipsum 4", stars: Math.round(Math.random() * 10) },
     { id: 4, name: "Lorem Ipsum 5", stars: Math.round(Math.random() * 10) },
   ];
+  const [membersSorted, setMembersSorted] = React.useState<Members>(sortArray(members, "stars"));
 
-  const [membersSorted, setMembersSorted] = React.useState<Members>(() => {
-    const temp = [...members];
-    return temp.sort((a: Member, b: Member) => (a.stars > b.stars ? -1 : 1))
-  });
+  const handleOnStarChanged = (data: IOnStarChanged) => {
+    const membersTemp = [...membersSorted];
+    const index = membersTemp.findIndex((el) => el.id === data.id);
 
-  console.log("non sorted", members);
-  console.log("sorted", membersSorted);
+    index >= 0 && (membersTemp[index].stars = data.stars);
 
-  const handleOnStarChanged = (data: any) => {
-    console.log(data);
+    const membersTempSorted = sortArray(membersTemp, "stars");
+
+    setMembersSorted(membersTempSorted);
   };
 
-  const renderMemberList = () => {
-    return membersSorted
-      // .sort((a: Member, b: Member) => (a.stars > b.stars ? -1 : 1))
-      .map((member, index) => {
-        return <CardMember
-          key={index}
+
+  const renderMemberList = () =>
+    membersSorted.map((member) => {
+      return (
+        <CardMember
+          key={member.id}
+          id={member.id}
           name={member.name}
           stars={member.stars}
           onStarChanged={handleOnStarChanged}
-        />;
-      });
-  };
+        />
+      );
+    });
 
   return <div className="App">{renderMemberList()}</div>;
 }

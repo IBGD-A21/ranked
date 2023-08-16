@@ -14,23 +14,18 @@ import { StyledCard, StyledCardContent, StyledCardHeader, StyledStarIcon } from 
 const MemberCard = (props: MemberCardProps) => {
   const {
     name = "Lorem Ipsum",
-    stars,
+    id,
     onStarChanged,
   } = props;
+  let { stars } = props;
 
-  const [_stars, setStars] = React.useState(stars);
-  
-  const renderStars = () => [...Array(_stars)].map((_, i) => <StyledStarIcon key={i} />);
-  
+  const renderStars = () => [...Array(stars)].map((_, i) => <StyledStarIcon key={i} />);
+
   const handleStarChange = (buttonState: "add" | "remove") => {
-    console.log('1', _stars);
-    setStars(prev => {
-      if (buttonState === "add") return prev + 1;
-      if (buttonState === "remove"  && prev > 1) return prev - 1;
-      return 0;
-    });
-    console.log('2', _stars);
-    onStarChanged(_stars);
+    if (buttonState === "add") stars += 1;
+    if (buttonState === "remove" && stars > 1) stars -= 1;
+
+    onStarChanged({ stars, id });
   };
 
   return (
@@ -47,20 +42,20 @@ const MemberCard = (props: MemberCardProps) => {
           <IconButton
             size="small"
             color="primary"
-            onClick={(_) => handleStarChange("add")}
+            onClick={() => handleStarChange("add")}
           >
             <Add />
           </IconButton>
           <IconButton
             size="small"
             color="primary"
-            onClick={(_) => handleStarChange("remove")}
+            onClick={() => handleStarChange("remove")}
           >
             <Remove />
           </IconButton>
 
           <Box>
-            <Typography variant="caption">{_stars}</Typography>
+            <Typography variant="caption">{stars}</Typography>
           </Box>
         </CardActions>
 
