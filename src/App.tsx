@@ -28,10 +28,11 @@ function App() {
 
 
   const renderMemberList = () =>
-    membersSorted.map((member) => {
+    membersSorted.map((member, index) => {
       return (
         <CardMember
           key={member.id}
+          place={index}
           id={member.id}
           name={member.name}
           stars={member.stars}

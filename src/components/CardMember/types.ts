@@ -1,6 +1,7 @@
 import { Member } from "../../models/member.types";
 
 export interface MemberCardProps extends Member {
+  place: number;
   onStarChanged: (data: IOnStarChanged) => void;
 }
 

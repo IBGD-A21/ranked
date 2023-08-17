@@ -10,11 +10,13 @@ import { stringAvatar } from "../../utils";
 import { MemberCardProps } from "./types";
 import { Add, Remove } from "@mui/icons-material";
 import { StyledCard, StyledCardContent, StyledCardHeader, StyledStarIcon } from "./styles";
+import { Mapper } from "../../models/mapper.types";
 
 const MemberCard = (props: MemberCardProps) => {
   const {
     name = "Lorem Ipsum",
     id,
+    place,
     onStarChanged,
   } = props;
   let { stars } = props;
@@ -23,14 +25,36 @@ const MemberCard = (props: MemberCardProps) => {
 
   const handleStarChange = (buttonState: "add" | "remove") => {
     if (buttonState === "add") stars += 1;
-    if (buttonState === "remove" && stars > 1) stars -= 1;
+    if (buttonState === "remove" && stars > 0) stars -= 1;
 
     onStarChanged({ stars, id });
   };
 
+  const renderPlace = () => {
+    const _place = place + 1;
+    const mappedPlaces: Mapper<number, string> = {
+      1: "🥇",
+      2: "🥈",
+      3: "🥉",
+    };
+    const mappedPlacesSuffix: Mapper<number, string> = {
+      1: "st",
+      2: "nd",
+      3: "rd",
+    };
+
+    const placeSymbol = mappedPlaces[_place] || "";
+    const placeSuffix = mappedPlacesSuffix[_place] || "th";
+
+    return `${_place}${placeSuffix} ${placeSymbol}`;
+  }
+
   return (
     <>
       <StyledCard>
+
+        <Box>{renderPlace()}</Box>
+
         <StyledCardHeader
           avatar={<Avatar {...stringAvatar(name)} />}
           title={name}
