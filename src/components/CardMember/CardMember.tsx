@@ -21,6 +21,12 @@ const MemberCard = (props: MemberCardProps) => {
   } = props;
   let { stars } = props;
 
+  const _place = place + 1;
+
+  React.useEffect(() => {
+    console.log({place: _place, id});
+  }, [_place, id])
+
   const renderStars = () => [...Array(stars)].map((_, i) => <StyledStarIcon key={i} />);
 
   const handleStarChange = (buttonState: "add" | "remove") => {
@@ -31,7 +37,6 @@ const MemberCard = (props: MemberCardProps) => {
   };
 
   const renderPlace = () => {
-    const _place = place + 1;
     const mappedPlaces: Mapper<number, string> = {
       1: "🥇",
       2: "🥈",
@@ -51,7 +56,7 @@ const MemberCard = (props: MemberCardProps) => {
 
   return (
     <>
-      <StyledCard>
+      <StyledCard place={place}>
 
         <Box>{renderPlace()}</Box>
 

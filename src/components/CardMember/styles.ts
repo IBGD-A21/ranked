@@ -2,6 +2,12 @@ import { Card, CardContent, CardHeader } from "@mui/material";
 import { Star } from "@mui/icons-material";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
+import { MemberCardProps } from "./types";
+import zIndex from "@mui/material/styles/zIndex";
+
+interface StyledCardHeaderProps {
+  place: MemberCardProps["place"];
+}
 
 const tinkleStars = (rotate: number) =>
   keyframes({
@@ -18,9 +24,23 @@ const appear = (initialScale: number) =>
     "100%": { transform: `scale(${1})` },
   });
 
-export const StyledCard = styled(Card)({
-  display: "flex",
-  alignItems: "center",
+const HEIGHT = 100;
+
+export const StyledCard = styled(Card)((props: StyledCardHeaderProps) => {
+  const {
+    place,
+  } = props;
+
+  return {
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    minHeight: `${HEIGHT}px`,
+    position: "absolute",
+    top: `${HEIGHT * place}px`,
+    transition: "top 250ms linear",
+    zIndex: `${-place}`,
+  };
 });
 
 export const StyledCardHeader = styled(CardHeader)({
