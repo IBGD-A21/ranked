@@ -17,15 +17,12 @@ const MemberCard = (props: MemberCardProps) => {
     name = "Lorem Ipsum",
     id,
     place,
+    total,
     onStarChanged,
   } = props;
   let { stars } = props;
 
   const _place = place + 1;
-
-  React.useEffect(() => {
-    console.log({place: _place, id});
-  }, [_place, id])
 
   const renderStars = () => [...Array(stars)].map((_, i) => <StyledStarIcon key={i} />);
 
@@ -56,7 +53,7 @@ const MemberCard = (props: MemberCardProps) => {
 
   return (
     <>
-      <StyledCard place={place}>
+      <StyledCard place={place} total={total}>
 
         <Box>{renderPlace()}</Box>
 
