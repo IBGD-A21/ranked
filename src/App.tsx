@@ -1,15 +1,11 @@
-import "./App.css";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import "./styles.scss";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import { Members } from "./models/member.types";
 import { CardMemberContainer } from "./components/CardMemberContainer";
 import { Box, Typography } from "@mui/material";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+const darkTheme = createTheme({ palette: { mode: "dark" }});
 
 function App() {
   const members: Members = [
@@ -28,12 +24,9 @@ function App() {
         flexDirection={"column"}
         alignItems={"center"}
       >
-        <h1>A21</h1>
-        <Typography component="span">Ranked</Typography>
-        <CardMemberContainer
-          members={members}
-          total={members.length}
-        />
+        <Typography variant="h1" className="A21">A21</Typography>
+        <Typography component="span" className="A21">Ranked</Typography>
+        <CardMemberContainer members={members} total={members.length} />
       </Box>
     </ThemeProvider>
   );

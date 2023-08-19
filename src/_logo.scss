@@ -1,0 +1,26 @@
+.A21 {
+  background: linear-gradient(
+    to right,
+    #0c97f6 16%,
+    #0baae2 33%,
+    #03dcd2 50%,
+    #04e2b3 66%,
+    #0bdc7a 83%,
+    #0cf659 100%,
+  );
+  background-clip: text;
+  background-size: 500% auto;
+  animation: textShine 5s ease-in-out infinite alternate;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes textShine {
+  0% {
+      background-position: 0% 50%;
+    }
+    100% {
+    background-position: 100% 50%;
+  }
+}
