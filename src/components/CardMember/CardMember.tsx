@@ -11,16 +11,18 @@ import { MemberCardProps } from "./types";
 import { Add, Remove } from "@mui/icons-material";
 import { StyledCard, StyledCardContent, StyledCardHeader, StyledStarIcon } from "./styles";
 import { Mapper } from "../../models/mapper.types";
+import { TotalContext } from "../../hooks/total.hook";
 
 const MemberCard = (props: MemberCardProps) => {
   const {
     name = "Lorem Ipsum",
     id,
     place,
-    total,
     onStarChanged,
   } = props;
   let { stars } = props;
+
+  const total = React.useContext(TotalContext);
 
   const _place = place + 1;
 

@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Members } from "./models/member.types";
 import { CardMemberContainer } from "./components/CardMemberContainer";
 import { Box, Typography } from "@mui/material";
+import { TotalContext } from "./hooks/total.hook";
 
 const darkTheme = createTheme({ palette: { mode: "dark" }});
 
@@ -26,7 +27,9 @@ function App() {
       >
         <Typography variant="h1" className="A21">A21</Typography>
         <Typography component="span" className="A21">Ranked</Typography>
-        <CardMemberContainer members={members} total={members.length} />
+        <TotalContext.Provider value={members.length}>
+          <CardMemberContainer members={members} />
+        </TotalContext.Provider>
       </Box>
     </ThemeProvider>
   );

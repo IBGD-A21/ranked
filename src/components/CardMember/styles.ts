@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader } from "@mui/material";
 import { Star } from "@mui/icons-material";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
-import { MemberCardProps, StyledCardHeaderProps } from "./types";
+import { StyledCardHeaderProps } from "./types";
 import { Mapper } from "../../models/mapper.types";
 
 const tinkleStars = (rotate: number) =>
@@ -20,7 +20,7 @@ const appear = (initialScale: number) =>
     "100%": { transform: `scale(${1})` },
   });
 
-const glow = (place: MemberCardProps['total']) => {
+const glow = (place: number) => {
   const mapColors: Mapper<number, string> = {
     0: "#ffb900",
     1: "#c6c6c6",

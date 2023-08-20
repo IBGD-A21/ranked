@@ -7,7 +7,7 @@ import { CardMemberContainerProps } from "./types";
 import { StyledBox, StyledCard } from "./styles";
 
 const CardMemberContainer = (props: CardMemberContainerProps) => {
-  const { members, total } = props;
+  const { members } = props;
   const [membersSorted, setMembersSorted] = React.useState<Members>(sortArray(members, "stars"));
 
   const handleOnStarChanged = (data: IStarChanged) => {
@@ -36,7 +36,6 @@ const CardMemberContainer = (props: CardMemberContainerProps) => {
           name={member.name}
           stars={member.stars}
           onStarChanged={handleOnStarChanged}
-          total={total}
         />
       );
     });
