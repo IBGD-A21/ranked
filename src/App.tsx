@@ -1,3 +1,4 @@
+import React from "react";
 import "./styles.scss";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,6 +18,16 @@ function App() {
     { id: 4, name: "Lorem Ipsum 5", stars: 0 },
   ];
 
+  const [_members, setItems] = React.useState<Members>(() => {
+    const membersFromLocalStorage = JSON.parse(localStorage.getItem("members") || "[]") as Members;
+    return membersFromLocalStorage.length > 0 ? membersFromLocalStorage : members;
+  });
+
+  React.useEffect(() => {
+    const membersFromLocalStorage = JSON.parse(localStorage.getItem("members") || "[]") as Members;
+    membersFromLocalStorage.length > 0 && setItems(membersFromLocalStorage);
+  }, []);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -27,8 +38,8 @@ function App() {
       >
         <Typography variant="h1" className="A21">A21</Typography>
         <Typography component="span" className="A21">Ranked</Typography>
-        <TotalContext.Provider value={members.length}>
-          <CardMemberContainer members={members} />
+        <TotalContext.Provider value={_members.length}>
+          <CardMemberContainer members={_members} />
         </TotalContext.Provider>
       </Box>
     </ThemeProvider>

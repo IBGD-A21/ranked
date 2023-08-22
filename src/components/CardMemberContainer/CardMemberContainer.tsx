@@ -23,6 +23,7 @@ const CardMemberContainer = (props: CardMemberContainerProps) => {
 
     const membersTempSorted = sortArray(membersTemp, "stars");
 
+    localStorage.setItem('members', JSON.stringify(membersTempSorted))
     setMembersSorted(membersTempSorted);
   };
 
