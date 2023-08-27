@@ -5,6 +5,7 @@ import { sortArray } from "../../utils";
 import { IStarChanged } from "../CardMember/types";
 import { CardMemberContainerProps } from "./types";
 import { StyledBox, StyledCard } from "./styles";
+import { MEMBERS_KEY } from "../../constants";
 
 const CardMemberContainer = (props: CardMemberContainerProps) => {
   const { members } = props;
@@ -27,7 +28,7 @@ const CardMemberContainer = (props: CardMemberContainerProps) => {
 
     const membersTempSorted = sortArray(membersTemp, "stars");
 
-    localStorage.setItem('members', JSON.stringify(membersTempSorted))
+    localStorage.setItem(MEMBERS_KEY, JSON.stringify(membersTempSorted))
     setMembersSorted(membersTempSorted);
   };
 

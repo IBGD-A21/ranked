@@ -7,6 +7,7 @@ import { CardMemberContainer } from "./components/CardMemberContainer";
 import { Box, Typography } from "@mui/material";
 import { TotalContext } from "./hooks/total.hook";
 import { Navbar } from "./components/navbar";
+import { MEMBERS_KEY } from "./constants";
 
 const darkTheme = createTheme({ palette: { mode: "dark" }});
 
@@ -20,12 +21,12 @@ function App() {
   ];
 
   const [_members, setMembers] = React.useState<Members>(() => {
-    const membersFromLocalStorage = JSON.parse(localStorage.getItem("members") || "[]") as Members;
+    const membersFromLocalStorage = JSON.parse(localStorage.getItem(MEMBERS_KEY) || "[]") as Members;
     return membersFromLocalStorage.length > 0 ? membersFromLocalStorage : members;
   });
 
   React.useEffect(() => {
-    const membersFromLocalStorage = JSON.parse(localStorage.getItem("members") || "[]") as Members;
+    const membersFromLocalStorage = JSON.parse(localStorage.getItem(MEMBERS_KEY) || "[]") as Members;
     membersFromLocalStorage.length > 0 && setMembers(membersFromLocalStorage);
   }, []);
 
@@ -37,7 +38,7 @@ function App() {
     };
     setMembers(prev => {
       const updatedList = [...prev, newMember];
-      localStorage.setItem("members", JSON.stringify(updatedList));
+      localStorage.setItem(MEMBERS_KEY, JSON.stringify(updatedList));
       return updatedList;
     });
   };
