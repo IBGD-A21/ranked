@@ -3,12 +3,11 @@ import AppBar from "@mui/material/AppBar";
 import { Box, Container, Toolbar, IconButton, Typography } from "@mui/material";
 import { PersonAddAlt } from "@mui/icons-material";
 import { AddMemberForm } from "../common/forms/add-user";
-import { AddMember, Member } from "../../models/member.types";
+import { AddMember } from "../../models/member.types";
 import { NavbarProps } from "./navbar-props";
 
 const Navbar = (props: NavbarProps) => {
   const {
-    members,
     addNewMember
   } = props;
   const [openDialog, setOpenDialog] = React.useState<boolean>(false);
@@ -18,14 +17,6 @@ const Navbar = (props: NavbarProps) => {
   const handleClose = () => setOpenDialog(false);
 
   const handleAddMember = (member: AddMember) => {
-
-    // localStorage.setItem('members', JSON.stringify(members))
-    const newMember: Member= {
-      id: members.length,
-      name: member.name,
-      stars: member.stars
-    }
-    // members.push(newMember)
     addNewMember && addNewMember(member);
     handleClose();
   };
