@@ -2,10 +2,11 @@ import React from "react";
 import "./styles.scss";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Members } from "./models/member.types";
+import { AddMember, Member, Members } from "./models/member.types";
 import { CardMemberContainer } from "./components/CardMemberContainer";
 import { Box, Typography } from "@mui/material";
 import { TotalContext } from "./hooks/total.hook";
+import { Navbar } from "./components/navbar";
 
 const darkTheme = createTheme({ palette: { mode: "dark" }});
 
@@ -18,15 +19,28 @@ function App() {
     { id: 4, name: "Lorem Ipsum 5", stars: 0 },
   ];
 
-  const [_members, setItems] = React.useState<Members>(() => {
+  const [_members, setMembers] = React.useState<Members>(() => {
     const membersFromLocalStorage = JSON.parse(localStorage.getItem("members") || "[]") as Members;
     return membersFromLocalStorage.length > 0 ? membersFromLocalStorage : members;
   });
 
   React.useEffect(() => {
     const membersFromLocalStorage = JSON.parse(localStorage.getItem("members") || "[]") as Members;
-    membersFromLocalStorage.length > 0 && setItems(membersFromLocalStorage);
+    membersFromLocalStorage.length > 0 && setMembers(membersFromLocalStorage);
   }, []);
+
+  const handleAddMember = (event: AddMember) => {
+    const newMember: Member = {
+      id: _members.length,
+      name: event.name,
+      stars: event.stars,
+    };
+    setMembers(prev => {
+      const updatedList = [...prev, newMember];
+      localStorage.setItem("members", JSON.stringify(updatedList));
+      return updatedList;
+    });
+  };
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -36,9 +50,13 @@ function App() {
         flexDirection={"column"}
         alignItems={"center"}
       >
-        <Typography variant="h1" className="A21">A21</Typography>
-        <Typography component="span" className="A21">Ranked</Typography>
         <TotalContext.Provider value={_members.length}>
+          <Navbar
+            addNewMember={handleAddMember}
+            members={_members}
+          />
+          <Typography variant="h1" className="A21">A21</Typography>
+          <Typography component="span" className="A21">Ranked</Typography>
           <CardMemberContainer members={_members} />
         </TotalContext.Provider>
       </Box>

@@ -10,6 +10,10 @@ const CardMemberContainer = (props: CardMemberContainerProps) => {
   const { members } = props;
   const [membersSorted, setMembersSorted] = React.useState<Members>(sortArray(members, "stars"));
 
+  React.useEffect(() => {
+    setMembersSorted(() => sortArray(members, "stars"))
+  }, [members]);
+
   const handleOnStarChanged = (data: IStarChanged) => {
     const membersTemp = membersSorted.map((member) => {
       if (member.id === data.id) {
