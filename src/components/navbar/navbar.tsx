@@ -5,6 +5,7 @@ import { PersonAddAlt } from "@mui/icons-material";
 import { AddMemberForm } from "../common/forms/add-user";
 import { AddMember } from "../../models/member.types";
 import { NavbarProps } from "./navbar-props";
+import { LogoA21 } from "../logo";
 
 const Navbar = (props: NavbarProps) => {
   const {
@@ -26,11 +27,13 @@ const Navbar = (props: NavbarProps) => {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            <LogoA21 />
             <Typography
               variant="h6"
               noWrap
               component="a"
               href="/"
+              marginLeft={1.5}
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },

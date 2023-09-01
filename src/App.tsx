@@ -56,8 +56,10 @@ function App() {
             addNewMember={handleAddMember}
             members={_members}
           />
-          <Typography variant="h1" className="A21">A21</Typography>
-          <Typography component="span" className="A21">Ranked</Typography>
+
+          {/* <Typography variant="h1" className="A21">A21</Typography> */}
+          {/* <Typography component="span" className="A21">Ranked</Typography> */}
+
           <CardMemberContainer members={_members} />
         </TotalContext.Provider>
       </Box>
