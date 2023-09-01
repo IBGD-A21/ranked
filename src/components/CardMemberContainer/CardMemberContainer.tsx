@@ -6,6 +6,7 @@ import { IStarChanged } from "../CardMember/types";
 import { CardMemberContainerProps } from "./types";
 import { StyledBox, StyledCard } from "./styles";
 import { MEMBERS_KEY } from "../../constants";
+import { NoData } from "../no-data";
 
 const CardMemberContainer = (props: CardMemberContainerProps) => {
   const { members } = props;
@@ -48,7 +49,15 @@ const CardMemberContainer = (props: CardMemberContainerProps) => {
 
   return (
     <StyledCard raised>
-      <StyledBox>{renderMemberList()}</StyledBox>
+      <StyledBox>
+        {members.length > 0
+          ? renderMemberList()
+          : <NoData
+              title="¡UPS!"
+              subTitle="No hay nadie a quien mostrar x_x"
+            />
+        }
+      </StyledBox>
     </StyledCard>
   );
 };
