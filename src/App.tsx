@@ -12,13 +12,7 @@ import { MEMBERS_KEY } from "./constants";
 const darkTheme = createTheme({ palette: { mode: "dark" }});
 
 function App() {
-  const members: Members = [
-    { id: 0, name: "Lorem Ipsum 1", stars: 0 },
-    { id: 1, name: "Lorem Ipsum 2", stars: 0 },
-    { id: 2, name: "Lorem Ipsum 3", stars: 0 },
-    { id: 3, name: "Lorem Ipsum 4", stars: 0 },
-    { id: 4, name: "Lorem Ipsum 5", stars: 0 },
-  ];
+  const members: Members = [];
 
   const [_members, setMembers] = React.useState<Members>(() => {
     const membersFromLocalStorage = JSON.parse(localStorage.getItem(MEMBERS_KEY) || "[]") as Members;
