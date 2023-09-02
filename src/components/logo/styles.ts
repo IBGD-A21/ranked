@@ -1,5 +1,4 @@
 import { Box, styled } from "@mui/material";
-import { glowNeonFilter } from "../../utils/animations";
 
 export const StyledIconContainer = styled(Box)({
   svg: {

@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { AddMember, Member, Members } from "./models/member.types";
 import { CardMemberContainer } from "./components/CardMemberContainer";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { TotalContext } from "./hooks/total.hook";
 import { Navbar } from "./components/navbar";
 import { MEMBERS_KEY } from "./constants";
