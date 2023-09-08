@@ -1,15 +1,18 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import { Box, Container, Toolbar, IconButton, Typography } from "@mui/material";
-import { PersonAddAlt } from "@mui/icons-material";
+import { PersonAddAlt, Download } from "@mui/icons-material";
 import { AddMemberForm } from "../common/forms/add-user";
 import { AddMember } from "../../models/member.types";
 import { NavbarProps } from "./navbar-props";
 import { LogoA21 } from "../logo";
+import { useExportExcel } from "../../utils/hooks";
+import { FILE_NAME } from "./constants";
 
 const Navbar = (props: NavbarProps) => {
   const {
-    addNewMember
+    addNewMember,
+    members,
   } = props;
   const [openDialog, setOpenDialog] = React.useState<boolean>(false);
 
@@ -21,6 +24,16 @@ const Navbar = (props: NavbarProps) => {
     addNewMember && addNewMember(member);
     handleClose();
   };
+
+  const { exportToExcel } = useExportExcel();
+
+  const handleDownloadMembers = () => {
+    const data = members.map((member) => ({
+      "Nombre": member.name,
+      "Estrellas": member.stars,
+    }))
+    exportToExcel({ data, fileName: FILE_NAME });
+  }
 
   return (
     <>
@@ -69,6 +82,9 @@ const Navbar = (props: NavbarProps) => {
             <Box sx={{ flexGrow: 0 }}>
               <IconButton onClick={handleAddUserDialog}>
                 <PersonAddAlt />
+              </IconButton>
+              <IconButton onClick={handleDownloadMembers}>
+                <Download />
               </IconButton>
             </Box>
           </Toolbar>
