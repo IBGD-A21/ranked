@@ -6,7 +6,7 @@ import { AddMemberForm } from "../common/forms/add-user";
 import { AddMember } from "../../models/member.types";
 import { NavbarProps } from "./navbar-props";
 import { LogoA21 } from "../logo";
-import { useExportExcel } from "../../utils/hooks";
+import { useExportExcel } from "../../hooks";
 import { FILE_NAME } from "./constants";
 
 const Navbar = (props: NavbarProps) => {

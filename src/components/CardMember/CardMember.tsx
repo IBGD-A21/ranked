@@ -11,7 +11,7 @@ import { MemberCardProps } from "./types";
 import { Add, Remove } from "@mui/icons-material";
 import { StyledCard, StyledCardContent, StyledCardHeader, StyledStarIcon } from "./styles";
 import { Mapper } from "../../models/mapper.types";
-import { TotalContext } from "../../hooks/total.hook";
+import { TotalContext } from "../../hooks/total/total.hooks";
 
 const MemberCard = (props: MemberCardProps) => {
   const {

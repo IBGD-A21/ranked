@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { AddMember, Member, Members } from "./models/member.types";
 import { CardMemberContainer } from "./components/CardMemberContainer";
 import { Box } from "@mui/material";
-import { TotalContext } from "./hooks/total.hook";
+import { TotalContext } from "./hooks/total/total.hooks";
 import { Navbar } from "./components/navbar";
 import { MEMBERS_KEY } from "./constants";
 
