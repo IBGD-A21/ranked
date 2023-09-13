@@ -12,7 +12,7 @@ export const AddMemberForm = (props: AddMemberFormProps) => {
   const emitAddMember = () => {
     if (name && stars) {
       const newMember: AddMember = { name, stars };
-      onAddMember && onAddMember(newMember);
+      onAddMember && onAddMember([newMember]);
     }
   };
 

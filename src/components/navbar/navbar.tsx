@@ -20,7 +20,7 @@ const Navbar = (props: NavbarProps) => {
 
   const handleClose = () => setOpenDialog(false);
 
-  const handleAddMember = (member: AddMember) => {
+  const handleAddMember = (member: AddMember[]) => {
     addNewMember && addNewMember(member);
     handleClose();
   };

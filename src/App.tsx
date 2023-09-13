@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.scss";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { AddMember, Member, Members } from "./models/member.types";
+import { AddMember, Members } from "./models/member.types";
 import { CardMemberContainer } from "./components/CardMemberContainer";
 import { Box } from "@mui/material";
 import { TotalContext } from "./hooks/total/total.hooks";
@@ -24,14 +24,15 @@ function App() {
     membersFromLocalStorage.length > 0 && setMembers(membersFromLocalStorage);
   }, []);
 
-  const handleAddMember = (event: AddMember) => {
-    const newMember: Member = {
-      id: _members.length,
-      name: event.name,
-      stars: event.stars,
-    };
+  const handleAddMember = (newMembers: AddMember[]) => {
+    const newMembersTemp: Members = newMembers.map((member, i) => ({
+      id: Date.now() + i,
+      name: member.name,
+      stars: member.stars,
+    }));
+
     setMembers(prev => {
-      const updatedList = [...prev, newMember];
+      const updatedList = [...prev, ...newMembersTemp];
       localStorage.setItem(MEMBERS_KEY, JSON.stringify(updatedList));
       return updatedList;
     });
