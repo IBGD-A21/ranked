@@ -2,12 +2,13 @@ import React from "react";
 import "./styles.scss";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { AddMember, Members } from "./models/member.types";
+import { Members } from "./models/member.types";
 import { CardMemberContainer } from "./components/CardMemberContainer";
 import { Box } from "@mui/material";
 import { TotalContext } from "./hooks/total/total.hooks";
 import { Navbar } from "./components/navbar";
 import { MEMBERS_KEY } from "./constants";
+import { IHandleAddMember } from "./models";
 
 const darkTheme = createTheme({ palette: { mode: "dark" }});
 
@@ -24,7 +25,8 @@ function App() {
     membersFromLocalStorage.length > 0 && setMembers(membersFromLocalStorage);
   }, []);
 
-  const handleAddMember = (newMembers: AddMember[]) => {
+  const handleAddMember = (params: IHandleAddMember) => {
+    const { newMembers, reset } = params;
     const newMembersTemp: Members = newMembers.map((member, i) => ({
       id: Date.now() + i,
       name: member.name,
@@ -32,6 +34,12 @@ function App() {
     }));
 
     setMembers(prev => {
+      if (reset) {
+        localStorage.clear();
+        localStorage.setItem(MEMBERS_KEY, JSON.stringify([...newMembersTemp]));
+        return [...newMembersTemp];
+      }
+
       const updatedList = [...prev, ...newMembersTemp];
       localStorage.setItem(MEMBERS_KEY, JSON.stringify(updatedList));
       return updatedList;

@@ -1,6 +1,7 @@
-import { AddMember, Members } from "../../models/member.types";
+import { IHandleAddMember } from "../../models";
+import { Members } from "../../models/member.types";
 
 export interface NavbarProps {
   members: Members;
-  addNewMember: (newMember: AddMember[]) => void;
+  addNewMember: (params: IHandleAddMember) => void;
 }

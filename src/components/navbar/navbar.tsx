@@ -3,11 +3,12 @@ import AppBar from "@mui/material/AppBar";
 import { Box, Container, Toolbar, IconButton, Typography } from "@mui/material";
 import { PersonAddAlt, Download } from "@mui/icons-material";
 import { AddMemberForm } from "../common/forms/add-user";
-import { AddMember } from "../../models/member.types";
 import { NavbarProps } from "./navbar-props";
 import { LogoA21 } from "../logo";
 import { useExportExcel } from "../../hooks";
 import { FILE_NAME } from "./constants";
+import { ExcelUploader } from "../common/import-excel";
+import { IHandleAddMember } from "../../models";
 
 const Navbar = (props: NavbarProps) => {
   const {
@@ -20,8 +21,8 @@ const Navbar = (props: NavbarProps) => {
 
   const handleClose = () => setOpenDialog(false);
 
-  const handleAddMember = (member: AddMember[]) => {
-    addNewMember && addNewMember(member);
+  const handleAddMember = (params: IHandleAddMember) => {
+    addNewMember && addNewMember(params);
     handleClose();
   };
 
@@ -79,13 +80,20 @@ const Navbar = (props: NavbarProps) => {
               A21
             </Typography>
 
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0 }} display="flex">
               <IconButton onClick={handleAddUserDialog}>
                 <PersonAddAlt />
               </IconButton>
               <IconButton onClick={handleDownloadMembers}>
                 <Download />
               </IconButton>
+
+              <ExcelUploader
+                onAddMember={($event) => {
+                  handleAddMember({ newMembers: $event, reset: true });
+                }}
+              />
+
             </Box>
           </Toolbar>
         </Container>
@@ -94,7 +102,9 @@ const Navbar = (props: NavbarProps) => {
       <AddMemberForm
         open={openDialog}
         onDialogClose={handleClose}
-        onAddMember={handleAddMember}
+        onAddMember={($event) => {
+          handleAddMember({ newMembers: $event, reset: false });
+        }}
       />
     </>
   );
