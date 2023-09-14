@@ -1,6 +1,6 @@
 import React from "react";
 import * as XLSX from "xlsx";
-import { AddMember } from "../../../models/member.types";
+import { AddMembers } from "../../../models";
 import { Box, IconButton, Typography } from "@mui/material";
 import { Upload } from "@mui/icons-material";
 import { ExcelUploaderProps } from "./types";
@@ -35,7 +35,7 @@ const ExcelUploader = (props: ExcelUploaderProps) => {
 
   React.useEffect(() => {
     const dataWithoutHeader = data.slice(1);
-    const member: AddMember[] = dataWithoutHeader.map((value: any) => ({
+    const member: AddMembers = dataWithoutHeader.map((value: any) => ({
       name: value[0],
       stars: value[1],
     }));

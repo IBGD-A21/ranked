@@ -1,6 +1,6 @@
-import { AddMember } from "./member.types";
+import { AddMembers } from "./member.types";
 
 export interface IHandleAddMember {
-  newMembers: AddMember[];
+  newMembers: AddMembers;
   reset: boolean;
 }

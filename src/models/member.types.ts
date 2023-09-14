@@ -6,4 +6,6 @@ export interface Member {
 
 export interface AddMember extends Omit<Member, 'id'> { };
 
+export type AddMembers = AddMember[];
+
 export type Members = Member[];
